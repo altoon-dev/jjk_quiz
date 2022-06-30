@@ -43,19 +43,11 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
-  void checkAnswer(bool userPickedAnswer) {
+  void checkAnswer(bool userPickedAnswer, BuildContext context) {
     bool correctAnswer = quizBrain.getQuestionBool();
 
     setState(() {
       if (quizBrain.isFinished() == true) {
-
-
-        Alert(
-          context: context,
-          title: 'Finished!',
-          desc: 'You\'ve reached the end of the quiz.',
-        ).show();
-
         quizBrain.reset();
         scoreKeeper = [];
       }
@@ -113,8 +105,13 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                //The user picked true.
-                checkAnswer(true);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Alert(
+                      context: context,
+                      title: "sda",
+                    )),
+                );
               },
             ),
           ),
@@ -133,7 +130,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
-                checkAnswer(false);
+                checkAnswer(false, context);
               },
             ),
           ),
