@@ -43,11 +43,19 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
-  void checkAnswer(bool userPickedAnswer, BuildContext context) {
+  void checkAnswer(bool userPickedAnswer) {
     bool correctAnswer = quizBrain.getQuestionBool();
 
     setState(() {
       if (quizBrain.isFinished() == true) {
+
+
+        Alert(
+          context: context,
+          title: 'Finished!',
+          desc: 'You\'ve reached the end of the quiz.',
+        ).show();
+
         quizBrain.reset();
         scoreKeeper = [];
       }
@@ -105,13 +113,8 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Alert(
-                      context: context,
-                      title: "sda",
-                    )),
-                );
+                //The user picked true.
+                checkAnswer(true);
               },
             ),
           ),
@@ -122,7 +125,7 @@ class _QuizPageState extends State<QuizPage> {
             child: FlatButton(
               color: Colors.red,
               child: Text(
-                'False',
+                'false',
                 style: TextStyle(
                   fontSize: 20.0,
                   color: Colors.white,
@@ -130,7 +133,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
-                checkAnswer(false, context);
+                checkAnswer(false);
               },
             ),
           ),
